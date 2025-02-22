@@ -7,7 +7,7 @@
 ## Ingredients
 
 ### Burger Patties  
-*(See [Best Hamburger Patty Recipe](../Dinner/Best_Hamburger_Patty_Recipe.md))*  
+*(See [Hamburger Patty Recipe](./Hamburger_Patty.md))*  
 - 1 1/2 pounds ground beef (80/20 blend recommended)  
 - 1 large egg  
 - 1/2 cup crushed crackers or panko breadcrumbs  
@@ -27,7 +27,7 @@
 - 1/2 cup grilled onions (caramelized)  
 
 ### Sauce  
-*(See [Pseudo In-N-Out / Cane’s Sauce](../Sauces/Pseudo_In-N-Out_Canes_Sauce.md))*  
+*(See [Pseudo In-N-Out / Cane’s Sauce](./Hamburger_Patty.md))*  
 - 1/2 cup mayonnaise  
 - 2 tablespoons ketchup  
 - 1 teaspoon Worcestershire sauce  
