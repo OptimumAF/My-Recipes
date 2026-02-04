@@ -6,6 +6,7 @@ Welcome to the **My Recipes** repository! This collection features a curated lis
 
 ## Table of Contents
 - [About](#about)  
+- [App (PWA)](#app-pwa)  
 - [Recipes](#recipes)  
 - [Contributing](#contributing)  
   - [Recipe Template](#recipe-template)  
@@ -19,6 +20,29 @@ Welcome to the **My Recipes** repository! This collection features a curated lis
 This repository contains a variety of recipes formatted for easy reading and consistent organization. Each recipe includes categories, cooking times, and serving sizes, along with detailed instructions and ingredient lists.
 
 You can browse the existing recipes or contribute your own by following the guidelines below.  
+
+---
+
+## App (PWA)
+
+This repo includes a small offline-friendly web app that reads the markdown recipes in `Recipes/`. It can be installed to a phone home screen from the browser menu.
+
+### Local development
+
+```bash
+npm install
+npm run dev
+```
+
+### Build
+
+```bash
+npm run build
+```
+
+### GitHub Pages
+
+The workflow in `.github/workflows/deploy.yml` builds and deploys to GitHub Pages. It sets `BASE_PATH` automatically so the app works from a repo subpath.
 
 ---
 
@@ -77,7 +101,7 @@ There are two ways to add your recipes to this repository:
 
 #### 2. Submit a Pull Request
 - Fork this repository.  
-- Add your recipe as a new markdown file in the `/recipes/` directory.  
+- Add your recipe as a new markdown file in the `Recipes/` directory.  
 - Use the format: `Recipe_Name.md` (replace spaces with underscores).  
 - Submit a pull request with a brief description of your addition.
 
