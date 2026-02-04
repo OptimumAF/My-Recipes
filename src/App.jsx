@@ -8,6 +8,7 @@ const formatCount = (count) => `${count} recipe${count === 1 ? "" : "s"}`;
 export default function App() {
   const [query, setQuery] = useState("");
   const [activeId, setActiveId] = useState(recipes[0]?.id ?? "");
+  const [isSidebarOpen, setIsSidebarOpen] = useState(true);
 
   const filtered = useMemo(() => {
     const normalized = query.trim().toLowerCase();
@@ -27,6 +28,31 @@ export default function App() {
       setActiveId(activeRecipe.id);
     }
   }, [activeRecipe, activeId]);
+
+  useEffect(() => {
+    if (typeof window === "undefined") return;
+    const media = window.matchMedia("(max-width: 900px)");
+    const syncSidebar = () => {
+      setIsSidebarOpen(!media.matches);
+    };
+    syncSidebar();
+    if (media.addEventListener) {
+      media.addEventListener("change", syncSidebar);
+      return () => media.removeEventListener("change", syncSidebar);
+    }
+    media.addListener(syncSidebar);
+    return () => media.removeListener(syncSidebar);
+  }, []);
+
+  const handleSelect = (id) => {
+    setActiveId(id);
+    if (typeof window !== "undefined") {
+      const media = window.matchMedia("(max-width: 900px)");
+      if (media.matches) {
+        setIsSidebarOpen(false);
+      }
+    }
+  };
 
   return (
     <div className="app">
@@ -55,26 +81,41 @@ export default function App() {
       </header>
 
       <main className="content">
-        <aside className="sidebar">
-          <h2>Recipes</h2>
-          <ul>
-            {filtered.map((recipe) => (
-              <li key={recipe.id}>
-                <button
-                  type="button"
-                  className={
-                    recipe.id === activeRecipe?.id ? "active" : undefined
-                  }
-                  onClick={() => setActiveId(recipe.id)}
-                >
-                  {recipe.title}
-                </button>
-              </li>
-            ))}
-          </ul>
-          {filtered.length === 0 && (
-            <p className="empty">No matches yet. Try another name.</p>
-          )}
+        <aside
+          className={`sidebar ${isSidebarOpen ? "is-open" : "is-collapsed"}`}
+        >
+          <div className="sidebar-header">
+            <h2>Recipes</h2>
+            <button
+              type="button"
+              className="sidebar-toggle"
+              onClick={() => setIsSidebarOpen((open) => !open)}
+              aria-expanded={isSidebarOpen}
+              aria-controls="recipe-list"
+            >
+              {isSidebarOpen ? "Hide list" : "Show list"}
+            </button>
+          </div>
+          <div className="sidebar-panel" id="recipe-list">
+            <ul>
+              {filtered.map((recipe) => (
+                <li key={recipe.id}>
+                  <button
+                    type="button"
+                    className={
+                      recipe.id === activeRecipe?.id ? "active" : undefined
+                    }
+                    onClick={() => handleSelect(recipe.id)}
+                  >
+                    {recipe.title}
+                  </button>
+                </li>
+              ))}
+            </ul>
+            {filtered.length === 0 && (
+              <p className="empty">No matches yet. Try another name.</p>
+            )}
+          </div>
         </aside>
 
         <section className="recipe">
