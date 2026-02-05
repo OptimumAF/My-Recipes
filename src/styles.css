@@ -270,10 +270,12 @@ p {
   }
 
   .sidebar.is-open .sidebar-panel {
-    max-height: 65vh;
+    max-height: calc(100vh - 16rem);
     opacity: 1;
     transform: translateY(0);
     margin-top: 1rem;
+    overflow-y: auto;
+    -webkit-overflow-scrolling: touch;
   }
 
   .sidebar.is-collapsed .sidebar-panel {
